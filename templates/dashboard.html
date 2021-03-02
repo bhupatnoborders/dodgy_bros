@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+  <a class="btn btn-primary" href="{% url 'car:sell' %}">List Car</a><br/><br/>
+
+  {% for object in object_list %}
+    <div class="card">
+      <div class="card-header">ID:- {{object.id}} <span class="float-right">Created:- {{object.created|date:"M d, Y" }}</span></div>
+      <div class="card-body">
+        <h5 class="card-title">{{ object.model }}</h5>
+        <p class="card-text">
+          Make:- {{ object.make }} <br>
+          Year:- {{ object.year|date:"M d, Y"  }} <br>
+          Condition:- {{ object.condition }} <br>
+          Price:- {{ object.price }} <br>
+        </p>
+        {% if object.is_sold %}
+          <button href="#" disabled class="btn btn-danger float-right">SOLD</button>
+        {% else %}
+          <a href="#" class="btn btn-primary float-right">Buy</a>
+        {% endif %}
+      </div>
+    </div><br>
+  {% endfor %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}
